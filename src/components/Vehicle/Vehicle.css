@@ -1,0 +1,9 @@
+.vehicle-box {
+    background-color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.vehicle-box img {
+    width: 80%;
+    height: 200px;
+}

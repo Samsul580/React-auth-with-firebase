@@ -1,0 +1,13 @@
+.home {
+    background-image: url(../../images/city.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.vehicles-area {
+    display: grid;
+    grid-template-columns: repeat(4, 20%);
+    grid-column-gap: 50px;
+    text-align: center;
+    padding: 200px 0px;
+}

@@ -1,0 +1,16 @@
+.form-box {
+    background-color: rgb(228, 220, 220);
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+}
+.destination-place {
+    background-color: rgb(245, 69, 16);
+    padding: 10px;
+    border-radius: 10px;
+}
+.small-card {
+    margin: 10px auto;
+    background-color: #fff;
+    padding: 10px;
+}
