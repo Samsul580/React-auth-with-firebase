@@ -28,9 +28,7 @@ const Login = () => {
         name: '',
         email: '',
         password: '',
-        photo: '',
-        error: '',
-        success: false
+        photo: ''
     });
     const provider = new firebase.auth.GoogleAuthProvider();
     const handleGoogleSignIn = () => {
@@ -46,7 +44,6 @@ const Login = () => {
                 setUser(signedInUser);
                 setLoggedInUser(signedInUser);
                 history.replace(from);
-                console.log(data)
             })
             .catch(error => {
                 console.log(error);
@@ -55,7 +52,6 @@ const Login = () => {
     }
     const handleValidation = (event) => {
         let isFieldValid = true;
-        console.log(event.target.value);
         if (event.target.name === "email") {
             isFieldValid = /\S+@\S+\.\S+/.test(event.target.value);
         }
@@ -80,11 +76,10 @@ const Login = () => {
             firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
                 .then(data => {
                     const newUserInfo = { ...user };
-                    newUserInfo.error = '';
-                    newUserInfo.success = true;
                     setUser(newUserInfo);
                     updateUserName(user.name);
                     setLoggedInUser(newUserInfo);
+                    history.replace(from);
                 })
                 .catch((error) => {
                     const newUserInfo = { ...user };
@@ -97,10 +92,9 @@ const Login = () => {
             firebase.auth().signInWithEmailAndPassword(user.email, user.password)
                 .then((data) => {
                     const newUserInfo = { ...user };
-                    newUserInfo.error = '';
-                    newUserInfo.success = true;
                     setUser(newUserInfo);
                     setLoggedInUser(newUserInfo);
+                    history.replace(from);
                 })
                 .catch((error) => {
                     const newUserInfo = { ...user };
