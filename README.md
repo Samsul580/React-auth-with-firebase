@@ -15,3 +15,6 @@ https://bd-riders-2e92f.web.app/
 
 ## Problems
 1. I can't implement google map.. So tat my google map code do comment. please check and review this map code please.
+
+## Confusion and solve...
+1. আমার কোড এর নাভবার destination route er সমস্যা ছিল। মিট session e রকি ভাই বলছে এটা না দিলেও হবে। তাই নাভবার destination route সেট করি নাই।

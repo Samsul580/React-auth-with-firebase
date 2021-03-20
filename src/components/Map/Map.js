@@ -15,7 +15,7 @@
 //   render() {
 //     return (
 //       // Important! Always set the container height explicitly
-//       <div>
+//       <div style={{ height: '100vh', width: '100%' }}>
 //         <GoogleMapReact
 //         //   bootstrapURLKeys={{ key: 'AIzaSyDz_YlzDxUUs4gz1TPD0WN_Fdwa4oaVJiw' }}
 //           defaultCenter={this.props.center}
