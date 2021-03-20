@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react';
 import './Login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faGoogle
+    faGoogle,
+    faFacebook
 } from '@fortawesome/free-brands-svg-icons';
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -28,11 +29,14 @@ const Login = () => {
         name: '',
         email: '',
         password: '',
-        photo: ''
+        photo: '',
+        error: ''
     });
-    const provider = new firebase.auth.GoogleAuthProvider();
+
+    const fbProvider = new firebase.auth.FacebookAuthProvider();
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
     const handleGoogleSignIn = () => {
-        firebase.auth().signInWithPopup(provider)
+        firebase.auth().signInWithPopup(googleProvider)
             .then(data => {
                 const { displayName, photoURL, email } = data.user;
                 const signedInUser = {
@@ -50,6 +54,32 @@ const Login = () => {
                 console.log(error.message);
             })
     }
+    const handleFbSignIn = () => {
+        firebase
+            .auth()
+            .signInWithPopup(fbProvider)
+            .then((data) => {
+                const { displayName, photoURL, email } = data.user;
+                const signedInUser = {
+                    isSignIn: true,
+                    name: displayName,
+                    email: email,
+                    photo: photoURL
+                }
+                setUser(signedInUser);
+                setLoggedInUser(signedInUser);
+                history.replace(from);
+
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                var email = error.email;
+                var credential = error.credential;
+                console.log(errorCode, errorMessage, email, credential)
+            });
+    }
+
     const handleValidation = (event) => {
         let isFieldValid = true;
         if (event.target.name === "email") {
@@ -76,6 +106,7 @@ const Login = () => {
             firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
                 .then(data => {
                     const newUserInfo = { ...user };
+                    newUserInfo.error = '';
                     setUser(newUserInfo);
                     updateUserName(user.name);
                     setLoggedInUser(newUserInfo);
@@ -84,7 +115,6 @@ const Login = () => {
                 .catch((error) => {
                     const newUserInfo = { ...user };
                     newUserInfo.error = error.message;
-                    newUserInfo.success = false;
                     setUser(newUserInfo);
                 });
         }
@@ -92,6 +122,7 @@ const Login = () => {
             firebase.auth().signInWithEmailAndPassword(user.email, user.password)
                 .then((data) => {
                     const newUserInfo = { ...user };
+                    newUserInfo.error = '';
                     setUser(newUserInfo);
                     setLoggedInUser(newUserInfo);
                     history.replace(from);
@@ -99,7 +130,6 @@ const Login = () => {
                 .catch((error) => {
                     const newUserInfo = { ...user };
                     newUserInfo.error = error.message;
-                    newUserInfo.success = false;
                     setUser(newUserInfo);
                 });
         }
@@ -108,8 +138,7 @@ const Login = () => {
     const updateUserName = name => {
         var user = firebase.auth().currentUser;
         user.updateProfile({
-            displayName: name,
-            photoURL: "https://example.com/jane-q-user/profile.jpg"
+            displayName: name
         }).then(data => {
             console.log(data)
         })
@@ -127,21 +156,21 @@ const Login = () => {
                         <form onSubmit={handleSubmit}>
                             {
                                 newUser ? <div>
-                                    <input type="text" name="name" onChange={handleValidation} id="" placeholder="Name" />
-                                    <input type="text" name="email" onChange={handleValidation} id="" placeholder="Username or Email" />
-                                    <input type="password" name="password" onChange={handleValidation} id="" placeholder="Password" />
-                                    <input type="password" name="confirm-password" onChange={handleValidation} id="" placeholder="Confirm password" />
+                                    <input type="text" name="name" onChange={handleValidation} id="" placeholder="Name" required />
+                                    <input type="text" name="email" onChange={handleValidation} id="" placeholder="Username or Email" required />
+                                    <input type="password" name="password" onChange={handleValidation} id="" placeholder="Password" required />
+                                    <input type="password" name="confirm-password" onChange={handleValidation} id="" placeholder="Confirm password" required />
                                 </div>
                                     : <div>
-                                        <input type="text" name="email" onChange={handleValidation} id="" placeholder="Email" />
-                                        <input type="password" name="password" onChange={handleValidation} id="" placeholder="Password" />
+                                        <input type="text" name="email" onChange={handleValidation} id="" placeholder="Email" required />
+                                        <input type="password" name="password" onChange={handleValidation} id="" placeholder="Password" required />
                                         <div className="text-left mb-3">
                                             <input type="checkbox" name="" id="remember" />
                                             <label htmlFor="remember">Remember Me</label>
                                         </div>
                                     </div>
                             }
-
+                            <p style={{ color: 'red' }}>{user.error}</p>
                             <input className="w-100 btn btn-warning" type="submit" value={newUser ? 'Create a new account' : 'Login'} />
                         </form>
                         <p className="mt-3">Don't have an account? <span className="new-account text-danger" onClick={() => setNewUser(!newUser)}>{newUser ? 'Login' : 'Create a new account'}</span></p>
@@ -149,6 +178,7 @@ const Login = () => {
                 </div>
                 <div className="icon">
                     <li><button className="btn" onClick={handleGoogleSignIn}><FontAwesomeIcon icon={faGoogle} className="text-danger" /> Continue with Google</button></li>
+                    <li><button className="btn" onClick={handleFbSignIn}><FontAwesomeIcon icon={faFacebook} className="text-primary" /> Continue with Google</button></li>
                 </div>
             </div>
         </div>

@@ -19,18 +19,16 @@ const Destination = () => {
         pickTo: ''
     })
     const findResult = vehicles.find(vh => vh.name === Vehicle);
-    // console.log(findResult);
     const handleInfo = (event) => {
         const newDestinationInfo = { ...destinationInfo };
         newDestinationInfo[event.target.name] = event.target.value;
         setDestinationInfo(newDestinationInfo);
-        console.log(destinationInfo);
     }
     return (
         <div>
             <div className="container">
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-sm-12">
                         <div className="form-box">
                             {
                                 destination ? <div>
@@ -115,8 +113,11 @@ const Destination = () => {
 
                         </div>
                     </div>
-                    <div className="col-md-8">
-                        <img src={Map} alt=""/>
+                    <div className="col-md-8 col-sm-12 map">
+                        <img className="w-100" src={Map} alt=""/>
+
+                        {/* Can't implement google map. so that do comment this code. */}
+                        {/* <SimpleMap></SimpleMap> */}
                     </div>
                 </div>
             </div>
