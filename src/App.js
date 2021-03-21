@@ -26,15 +26,15 @@ function App() {
                         <Route path="/home">
                             <Home></Home>
                         </Route>
-                        <Route exact path="/">
-                            <Home></Home>
-                        </Route>
                         <Route path="/login">
                             <Login></Login>
                         </Route>
                         <PrivateRoute path="/destination/:Vehicle">
                             <Destination></Destination>
                         </PrivateRoute>
+                        <Route exact path="/">
+                            <Home></Home>
+                        </Route>
                         <Route path="*">
                             <NoMatch></NoMatch>
                         </Route>

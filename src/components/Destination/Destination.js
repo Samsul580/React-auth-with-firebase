@@ -4,6 +4,7 @@ import './Destination.css';
 import Map from '../../images/Map.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import ReactMap from '../Map/Map'
 
 const Destination = () => {
     const { Vehicle } = useParams();
@@ -38,65 +39,68 @@ const Destination = () => {
                                         <h5 className="text-left">{destinationInfo.pickTo}</h5>
                                     </div>
                                     <div className="container small-card text-center">
-                                        <div className="row">
-                                            <div className="col-md-4">
+                                        <div className="row price-card">
+                                            <div className="col-md-4 col-sm-4 col-3 h-100 my-auto">
                                                 <img className="w-100" src={findResult.picture} alt="vehicle" />
                                             </div>
-                                            <div className="col-md-3">
+                                            <div className="col-md-3 col-sm-3 col-3 h-100 my-auto">
                                                 <h6>{findResult.name}</h6>
                                             </div>
-                                            <div className="col-md-3">
+                                            <div className="col-md-3 col-sm-3 col-3 h-100 my-auto">
                                                 <h6><FontAwesomeIcon icon={faUserFriends} />4</h6>
                                             </div>
-                                            <div className="col-md-2">
+                                            <div className="col-md-2 col-sm-2 col-2 h-100 my-auto">
                                                 <h6>${findResult.price}</h6>
                                             </div>
                                         </div>
                                     </div>
+                                    
                                     <div className="container small-card text-center">
-                                        <div className="row">
-                                            <div className="col-md-4">
+                                        <div className="row price-card">
+                                            <div className="col-md-4 col-sm-4 col-3 h-100 my-auto">
                                                 <img className="w-100" src={findResult.picture} alt="vehicle" />
                                             </div>
-                                            <div className="col-md-3">
+                                            <div className="col-md-3 col-sm-3 col-3 h-100 my-auto">
                                                 <h6>{findResult.name}</h6>
                                             </div>
-                                            <div className="col-md-3">
+                                            <div className="col-md-3 col-sm-3 col-3 h-100 my-auto">
                                                 <h6><FontAwesomeIcon icon={faUserFriends} />4</h6>
                                             </div>
-                                            <div className="col-md-2">
+                                            <div className="col-md-2 col-sm-2 col-2 h-100 my-auto">
                                                 <h6>${findResult.price}</h6>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div className="container small-card text-center">
-                                        <div className="row">
-                                            <div className="col-md-4">
+                                        <div className="row price-card">
+                                            <div className="col-md-4 col-sm-4 col-3 h-100 my-auto">
                                                 <img className="w-100" src={findResult.picture} alt="vehicle" />
                                             </div>
-                                            <div className="col-md-3">
+                                            <div className="col-md-3 col-sm-3 col-3 h-100 my-auto">
                                                 <h6>{findResult.name}</h6>
                                             </div>
-                                            <div className="col-md-3">
+                                            <div className="col-md-3 col-sm-3 col-3 h-100 my-auto">
                                                 <h6><FontAwesomeIcon icon={faUserFriends} />4</h6>
                                             </div>
-                                            <div className="col-md-2">
+                                            <div className="col-md-2 col-sm-2 col-2 h-100 my-auto">
                                                 <h6>${findResult.price}</h6>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div className="container small-card text-center">
-                                        <div className="row">
-                                            <div className="col-md-4">
+                                        <div className="row price-card">
+                                            <div className="col-md-4 col-sm-4 col-3 h-100 my-auto">
                                                 <img className="w-100" src={findResult.picture} alt="vehicle" />
                                             </div>
-                                            <div className="col-md-3">
+                                            <div className="col-md-3 col-sm-3 col-3 h-100 my-auto">
                                                 <h6>{findResult.name}</h6>
                                             </div>
-                                            <div className="col-md-3">
+                                            <div className="col-md-3 col-sm-3 col-3 h-100 my-auto">
                                                 <h6><FontAwesomeIcon icon={faUserFriends} />4</h6>
                                             </div>
-                                            <div className="col-md-2">
+                                            <div className="col-md-2 col-sm-2 col-2 h-100 my-auto">
                                                 <h6>${findResult.price}</h6>
                                             </div>
                                         </div>
@@ -114,10 +118,8 @@ const Destination = () => {
                         </div>
                     </div>
                     <div className="col-md-8 col-sm-12 map">
-                        <img className="w-100" src={Map} alt=""/>
-
-                        {/* Can't implement google map. so that do comment this code. */}
-                        {/* <SimpleMap></SimpleMap> */}
+                        {/* <img className="w-100" src={Map} alt=""/> */}
+                        <ReactMap></ReactMap>
                     </div>
                 </div>
             </div>

@@ -69,7 +69,6 @@ const Login = () => {
                 setUser(signedInUser);
                 setLoggedInUser(signedInUser);
                 history.replace(from);
-
             })
             .catch((error) => {
                 var errorCode = error.code;
